@@ -1,9 +1,6 @@
 package mod.instance;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Point;
+import java.awt.*;
 
 import javax.swing.JPanel;
 
@@ -36,22 +33,30 @@ public class DependencyLine extends JPanel
     }
 
     @Override
-    public void paintComponent(Graphics g)
-    {
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g); // 確保先呼叫父類別方法
+
+        Graphics2D g2 = (Graphics2D) g;
         Point fpPrime;
         Point tpPrime;
         renewConnect();
-        fpPrime = new Point(fp.x - this.getLocation().x,
-                fp.y - this.getLocation().y);
-        tpPrime = new Point(tp.x - this.getLocation().x,
-                tp.y - this.getLocation().y);
-        g.drawLine(fpPrime.x, fpPrime.y, tpPrime.x, tpPrime.y);
-        paintArrow(g, tpPrime);
-        if (isSelect == true)
-        {
-            paintSelect(g);
+        fpPrime = new Point(fp.x - this.getLocation().x, fp.y - this.getLocation().y);
+        tpPrime = new Point(tp.x - this.getLocation().x, tp.y - this.getLocation().y);
+
+        // 設定虛線樣式
+        float[] dashPattern = {10, 5};
+        g2.setStroke(new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, dashPattern, 0));
+        g2.setColor(Color.BLACK);
+        g2.drawLine(fpPrime.x, fpPrime.y, tpPrime.x, tpPrime.y);
+
+//        paintArrow(g2, fpPrime, tpPrime); // 傳入起點和終點畫箭頭
+        paintArrow(g2, tpPrime);
+
+        if (isSelect) {
+            paintSelect(g2);
         }
     }
+
 
     @Override
     public void reSize()
@@ -63,10 +68,51 @@ public class DependencyLine extends JPanel
     }
 
     @Override
-    public void paintArrow(Graphics g, Point point)
-    {
-        // TODO Auto-generated method stub
+    public void paintArrow(Graphics g, Point to) {
+        Graphics2D g2 = (Graphics2D) g;
+
+        Point from = new Point(fp.x - this.getLocation().x, fp.y - this.getLocation().y);
+
+//        paintArrow(g2, from, to);
+        double dx = to.x - from.x;
+        double dy = to.y - from.y;
+        double angle = Math.atan2(dy, dx);
+
+        int len = 10; // 箭頭長度
+        int width = 5; // 箭頭寬度
+
+        int x1 = to.x - (int) (len * Math.cos(angle - Math.PI / 6));
+        int y1 = to.y - (int) (len * Math.sin(angle - Math.PI / 6));
+        int x2 = to.x - (int) (len * Math.cos(angle + Math.PI / 6));
+        int y2 = to.y - (int) (len * Math.sin(angle + Math.PI / 6));
+
+        int[] xPoints = {to.x, x1, x2};
+        int[] yPoints = {to.y, y1, y2};
+
+        g2.fillPolygon(xPoints, yPoints, 3);
     }
+
+//    public void paintArrow(Graphics2D g2, Point from, Point to) {
+//        double dx = to.x - from.x;
+//        double dy = to.y - from.y;
+//        double angle = Math.atan2(dy, dx);
+//
+//        int len = 10; // 箭頭長度
+//        int width = 5; // 箭頭寬度
+//
+//        int x1 = to.x - (int) (len * Math.cos(angle - Math.PI / 6));
+//        int y1 = to.y - (int) (len * Math.sin(angle - Math.PI / 6));
+//        int x2 = to.x - (int) (len * Math.cos(angle + Math.PI / 6));
+//        int y2 = to.y - (int) (len * Math.sin(angle + Math.PI / 6));
+//
+//        int[] xPoints = {to.x, x1, x2};
+//        int[] yPoints = {to.y, y1, y2};
+//
+//        g2.fillPolygon(xPoints, yPoints, 3);
+//    }
+
+
+
 
     @Override
     public void setConnect(DragPack dPack)
