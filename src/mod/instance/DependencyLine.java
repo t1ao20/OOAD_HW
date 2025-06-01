@@ -23,6 +23,7 @@ public class DependencyLine extends JPanel
     boolean				isSelect		= false;
     int					selectBoxSize	= 5;
     CanvasPanelHandler	cph;
+    boolean				isHighlight		= false;
 
     public DependencyLine(CanvasPanelHandler cph)
     {
@@ -47,14 +48,18 @@ public class DependencyLine extends JPanel
         float[] dashPattern = {10, 5};
         g2.setStroke(new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, dashPattern, 0));
         g2.setColor(Color.BLACK);
+        if (isHighlight)
+        {
+            g2.setColor(Color.RED);
+        }
         g2.drawLine(fpPrime.x, fpPrime.y, tpPrime.x, tpPrime.y);
 
-//        paintArrow(g2, fpPrime, tpPrime); // 傳入起點和終點畫箭頭
         paintArrow(g2, tpPrime);
 
         if (isSelect) {
             paintSelect(g2);
         }
+
     }
 
 
@@ -88,28 +93,12 @@ public class DependencyLine extends JPanel
 
         int[] xPoints = {to.x, x1, x2};
         int[] yPoints = {to.y, y1, y2};
-
+        if (isHighlight)
+        {
+            g2.setColor(Color.RED);
+        }
         g2.fillPolygon(xPoints, yPoints, 3);
     }
-
-//    public void paintArrow(Graphics2D g2, Point from, Point to) {
-//        double dx = to.x - from.x;
-//        double dy = to.y - from.y;
-//        double angle = Math.atan2(dy, dx);
-//
-//        int len = 10; // 箭頭長度
-//        int width = 5; // 箭頭寬度
-//
-//        int x1 = to.x - (int) (len * Math.cos(angle - Math.PI / 6));
-//        int y1 = to.y - (int) (len * Math.sin(angle - Math.PI / 6));
-//        int x2 = to.x - (int) (len * Math.cos(angle + Math.PI / 6));
-//        int y2 = to.y - (int) (len * Math.sin(angle + Math.PI / 6));
-//
-//        int[] xPoints = {to.x, x1, x2};
-//        int[] yPoints = {to.y, y1, y2};
-//
-//        g2.fillPolygon(xPoints, yPoints, 3);
-//    }
 
 
 
@@ -193,4 +182,10 @@ public class DependencyLine extends JPanel
     {
         this.isSelect = isSelect;
     }
+
+    public JPanel getFrom() { return this.from; }
+    public JPanel getTo() { return this.to; }
+    public int getFromSide() { return this.fromSide; }
+    public int getToSide() { return this.toSide; }
+    public void setHighlight(boolean isHighlight) { this.isHighlight = isHighlight; }
 }

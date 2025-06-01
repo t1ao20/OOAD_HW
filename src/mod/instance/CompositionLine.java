@@ -1,10 +1,6 @@
 package mod.instance;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Polygon;
+import java.awt.*;
 
 import javax.swing.JPanel;
 
@@ -29,6 +25,7 @@ public class CompositionLine extends JPanel
 	boolean				isSelect		= false;
 	int					selectBoxSize	= 5;
 	CanvasPanelHandler	cph;
+	boolean				isHighlight		= false;
 
 	public CompositionLine(CanvasPanelHandler cph)
 	{
@@ -49,6 +46,10 @@ public class CompositionLine extends JPanel
 		tpPrime = new Point(tp.x - this.getLocation().x,
 				tp.y - this.getLocation().y);
 		g.setColor(Color.BLACK);
+		if (isHighlight)
+		{
+			g.setColor(Color.RED);
+		}
 		g.drawLine(fpPrime.x, fpPrime.y, tpPrime.x, tpPrime.y);
 		paintArrow(g, tpPrime);
 		if (isSelect == true)
@@ -79,6 +80,10 @@ public class CompositionLine extends JPanel
 		g.setColor(Color.WHITE);
 		g.fillPolygon(polygon);
 		g.setColor(Color.BLACK);
+		if (isHighlight)
+		{
+			g.setColor(Color.RED);
+		}
 		g.drawPolygon(polygon);
 	}
 
@@ -161,4 +166,10 @@ public class CompositionLine extends JPanel
 	{
 		this.isSelect = isSelect;
 	}
+
+	public JPanel getFrom() { return this.from; }
+	public JPanel getTo() { return this.to; }
+	public int getFromSide() { return this.fromSide; }
+	public int getToSide() { return this.toSide; }
+	public void setHighlight(boolean isHighlight) { this.isHighlight = isHighlight; }
 }

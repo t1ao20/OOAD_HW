@@ -1,10 +1,6 @@
 package bgWork.handler;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.Vector;
 
@@ -16,11 +12,13 @@ import Pack.DragPack;
 import Pack.SendText;
 import bgWork.InitProcess;
 import mod.instance.*;
+import mod.*;
 
 public class CanvasPanelHandler extends PanelHandler
 {
 	Vector <JPanel>	members		= new Vector <>();
 	Vector <JPanel>	selectComp	= new Vector <>();
+	Vector <JPanel>	lines		= new Vector <>();
 	int				boundShift	= 10;
 
 	public CanvasPanelHandler(JPanel Container, InitProcess process)
@@ -104,6 +102,9 @@ public class CanvasPanelHandler extends PanelHandler
 	{
 		boolean isSelect = false;
 		selectComp = new Vector <>();
+		for (int i = 0; i < lines.size(); i++) {
+			setHighlight(lines.elementAt(i), false);
+		}
 		for (int i = 0; i < members.size(); i ++)
 		{
 			if (isInside(members.elementAt(i), e.getPoint()) == true
@@ -112,26 +113,46 @@ public class CanvasPanelHandler extends PanelHandler
 				switch (core.isFuncComponent(members.elementAt(i)))
 				{
 					case 0:
-						((BasicClass) members.elementAt(i)).setSelect(true);
+						BasicClass basicClass = (BasicClass) members.elementAt(i);
+						(basicClass).setSelect(true);
 						selectComp.add(members.elementAt(i));
 						isSelect = true;
+						highlightLine(e.getPoint(), basicClass, members.elementAt(i));
 						break;
 					case 1:
-						((UseCase) members.elementAt(i)).setSelect(true);
+						UseCase curUsecase = ((UseCase) members.elementAt(i));
+						(curUsecase).setSelect(true);
 						selectComp.add(members.elementAt(i));
 						isSelect = true;
+						highlightLine(e.getPoint(), curUsecase, members.elementAt(i));
 						break;
 					case 5:
 						Point p = e.getPoint();
 						p.x -= members.elementAt(i).getLocation().x;
 						p.y -= members.elementAt(i).getLocation().y;
-						if (groupIsSelect((GroupContainer) members.elementAt(i),
-								p))
+						if (groupIsSelect((GroupContainer) members.elementAt(i), p))
 						{
-							((GroupContainer) members.elementAt(i))
-									.setSelect(true);
+							GroupContainer groupContainer = (GroupContainer) members.elementAt(i);
+							(groupContainer).setSelect(true);
 							selectComp.add(members.elementAt(i));
 							isSelect = true;
+
+							for (int j = 0; j < groupContainer.getComponentCount(); j++) {
+								if (core.isCore(core))
+								{
+									switch (core.isFuncComponent(groupContainer.getComponent(j)))
+									{
+										case 0:
+											BasicClass innerClass = (BasicClass) groupContainer.getComponent(j);
+											highlightLine(p, innerClass, innerClass); // 如果 innerClass extends JPanel implements PortObject											break;
+										case 1:
+											UseCase innerUsecase = (UseCase) groupContainer.getComponent(j);
+											highlightLine(p, innerUsecase, innerUsecase); // 如果 UseCase extends JPanel implements PortObject											break;
+										default:
+											break;
+									}
+								}
+							}
 						}
 						else
 						{
@@ -393,6 +414,7 @@ public class CanvasPanelHandler extends PanelHandler
 					default:
 						break;
 				}
+				lines.add(funcObj);
 				contextPanel.add(funcObj, 0);
 				break;
 		}
@@ -535,4 +557,97 @@ public class CanvasPanelHandler extends PanelHandler
 		}
 		return location;
 	}
+
+	void setHighlight(Object obj, boolean isHighlight)
+	{
+		switch (core.isFuncComponent(obj))
+		{
+			case 2:
+				((AssociationLine) obj).setHighlight(isHighlight);
+				break;
+			case 3:
+				((CompositionLine) obj).setHighlight(isHighlight);
+				break;
+			case 4:
+				((GeneralizationLine) obj).setHighlight(isHighlight);
+				break;
+			case 6:
+				((DependencyLine) obj).setHighlight(isHighlight);
+				break;
+			default:
+				break;
+		}
+	}
+
+	void highlightLine(Point e, PortObj curObj, JPanel panel) {
+		for (int i = 0; i < 4; i++) {
+			Point port = curObj.getPortLoc(i);
+			int boxSize = curObj.getSelectBoxSize();
+			Rectangle area;
+
+			// 根據 port 方向建構選取區域
+			if (i == 0 || i == 3) { // 上下
+				area = new Rectangle(port.x, port.y, boxSize * 2, boxSize);
+			} else { // 左右
+				area = new Rectangle(port.x, port.y, boxSize, boxSize * 2);
+			}
+
+			// 如果滑鼠點擊落在該 port 區域
+			if (area.contains(e)) {
+				System.out.println(i + (i == 0 ? "down" : i == 1 ? "left" : i == 2 ? "right" : "up"));
+				setLineHighlight(i, panel);
+				break;
+			}
+		}
+	}
+	void setLineHighlight(int side, JPanel panel)
+	{
+		for (int j = 0; j < lines.size(); j ++)
+		{
+			int element = core.isFuncComponent(lines.elementAt(j));
+
+			switch (element)
+			{
+				case 2:
+					if ((panel == ((AssociationLine) lines.elementAt(j)).getFrom() &&
+						((AssociationLine) lines.elementAt(j)).getFromSide() == side) ||
+						(panel == ((AssociationLine) lines.elementAt(j)).getTo() &&
+						((AssociationLine) lines.elementAt(j)).getToSide() == side))
+					{
+						((AssociationLine) lines.elementAt(j)).setHighlight(true);
+					}
+					break;
+				case 3:
+					if ((panel == ((CompositionLine) lines.elementAt(j)).getFrom() &&
+						((CompositionLine) lines.elementAt(j)).getFromSide() == side) ||
+						(panel == ((CompositionLine) lines.elementAt(j)).getTo() &&
+						((CompositionLine) lines.elementAt(j)).getToSide() == side))
+					{
+						((CompositionLine) lines.elementAt(j)).setHighlight(true);
+					}
+					break;
+				case 4:
+					if ((panel == ((GeneralizationLine) lines.elementAt(j)).getFrom() &&
+						((GeneralizationLine) lines.elementAt(j)).getFromSide() == side) ||
+						(panel == ((GeneralizationLine) lines.elementAt(j)).getTo() &&
+						((GeneralizationLine) lines.elementAt(j)).getToSide() == side))
+					{
+						((GeneralizationLine) lines.elementAt(j)).setHighlight(true);
+					}
+					break;
+				case 6:
+					if ((panel == ((DependencyLine) lines.elementAt(j)).getFrom() &&
+						((DependencyLine) lines.elementAt(j)).getFromSide() == side) ||
+						(panel == ((DependencyLine) lines.elementAt(j)).getTo() &&
+						((DependencyLine) lines.elementAt(j)).getToSide() == side))
+					{
+						((DependencyLine) lines.elementAt(j)).setHighlight(true);
+					}
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
 }

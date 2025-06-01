@@ -1,9 +1,6 @@
 package mod.instance;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Point;
+import java.awt.*;
 
 import javax.swing.JPanel;
 
@@ -26,6 +23,7 @@ public class AssociationLine extends JPanel
 	boolean				isSelect		= false;
 	int					selectBoxSize	= 5;
 	CanvasPanelHandler	cph;
+	boolean				isHighlight		= false;
 
 	public AssociationLine(CanvasPanelHandler cph)
 	{
@@ -45,7 +43,12 @@ public class AssociationLine extends JPanel
 				fp.y - this.getLocation().y);
 		tpPrime = new Point(tp.x - this.getLocation().x,
 				tp.y - this.getLocation().y);
+		if (isHighlight)
+		{
+			g.setColor(Color.RED);
+		}
 		g.drawLine(fpPrime.x, fpPrime.y, tpPrime.x, tpPrime.y);
+
 		paintArrow(g, tpPrime);
 		if (isSelect == true)
 		{
@@ -79,6 +82,14 @@ public class AssociationLine extends JPanel
 				mfp);
 		toSide = new AreaDefine().getArea(to.getLocation(), to.getSize(), mtp);
 		renewConnect();
+
+		System.out.println("From location: " + from.getLocation());
+		System.out.println("From Size: " + from.getSize());
+//		System.out.println("mfp: " + dPack.getFrom());
+		System.out.println("To location: " + to.getLocation());
+		System.out.println("To Size: " + to.getSize());
+//		System.out.println("mtp: " + dPack.getTo());
+
 		System.out.println("from side " + fromSide);
 		System.out.println("to side " + toSide);
 	}
@@ -147,4 +158,15 @@ public class AssociationLine extends JPanel
 	{
 		this.isSelect = isSelect;
 	}
+
+	public boolean isConnectedTo(JPanel port) {
+		return from == port || to == port;
+	}
+
+	public JPanel getFrom() { return this.from; }
+	public JPanel getTo() { return this.to; }
+	public int getFromSide() { return this.fromSide; }
+	public int getToSide() { return this.toSide; }
+	public void setHighlight(boolean isHighlight) { this.isHighlight = isHighlight; }
+
 }

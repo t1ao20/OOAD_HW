@@ -1,8 +1,6 @@
 package mod.instance;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
+import java.awt.*;
 import java.util.Vector;
 
 import javax.swing.JPanel;
@@ -10,8 +8,9 @@ import javax.swing.JPanel;
 import bgWork.handler.CanvasPanelHandler;
 import mod.IClassPainter;
 import mod.IFuncComponent;
+import mod.PortObj;
 
-public class UseCase extends JPanel implements IFuncComponent, IClassPainter
+public class UseCase extends JPanel implements IFuncComponent, IClassPainter, PortObj
 {
 	Vector <String>		texts			= new Vector <>();
 	Dimension			defSize			= new Dimension(150, 40);
@@ -103,5 +102,32 @@ public class UseCase extends JPanel implements IFuncComponent, IClassPainter
 		gra.fillRect(this.getWidth() - selectBoxSize,
 				this.getHeight() / 2 - selectBoxSize, selectBoxSize,
 				selectBoxSize * 2);
+	}
+
+	public int getSelectBoxSize() { return selectBoxSize; }
+	public Point getPortLoc(int portSide) {
+		Point loc = new Point(0, 0); // port 左上角點
+		switch (portSide)
+		{
+			case 0: // 下
+				loc.x = this.getLocation().x + this.getWidth() / 2 - selectBoxSize;
+				loc.y = this.getLocation().y + this.getHeight() - selectBoxSize;
+				break;
+			case 1: // 左
+				loc.x = this.getLocation().x;
+				loc.y = this.getLocation().y + this.getHeight() / 2 - selectBoxSize;
+				break;
+			case 2: // 右
+				loc.x = this.getLocation().x + this.getWidth() - selectBoxSize;
+				loc.y = this.getLocation().y + this.getHeight() / 2 - selectBoxSize;
+				break;
+			case 3: // 上
+				loc.x = this.getLocation().x + this.getWidth() / 2 - selectBoxSize;
+				loc.y = this.getLocation().y;
+				break;
+			default:
+				break;
+		}
+		return loc;
 	}
 }
