@@ -23,10 +23,6 @@ public class Composite extends Shape {
         this.setY(minY);
         this.setWidth(maxX - minX);
         this.setHeight(maxY - minY);
-//        this.x = minX;
-//        this.y = minY;
-//        this.width = maxX - minX;
-//        this.height = maxY - minY;
     }
 
     @Override
@@ -41,7 +37,6 @@ public class Composite extends Shape {
         for (Shape s : children) {
             //子圖案select狀態設定為composite物件的狀態
             s.setSelected(this.isSelected());
-//            s.selected = selected;
             s.draw(g);
         }
         if (this.isSelected()) {
@@ -49,6 +44,7 @@ public class Composite extends Shape {
             g.drawRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
         }
     }
+
 
     @Override
     public boolean contains(int mx, int my) {
@@ -74,9 +70,6 @@ public class Composite extends Shape {
 
         this.setX(newX);
         this.setY(newY);
-
-//        this.x = newX;
-//        this.y = newY;
 
         for (Shape s : children) {
             s.move(s.getX() + dx, s.getY() + dy);

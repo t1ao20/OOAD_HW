@@ -31,9 +31,13 @@ public class Rect extends Shape {
     public void draw(Graphics g) {
         g.setColor(this.isSelected() ? Color.RED : Color.BLACK);
         g.drawRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
-        drawTagBG(g);
-        drawPorts(g);
-        drawLabel(g);
+//        drawTagBG(g);
+//        drawLabel(g);
+        this.getLabel().draw(g, this.getX(), this.getY(), this.getWidth(), this.getHeight());
+
+        if (this.isSelected()){
+            drawPorts(g);
+        }
     }
 
     @Override

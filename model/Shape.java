@@ -11,14 +11,9 @@ public abstract class Shape {
     private int height;
     private int depth;
     private boolean selected;
-    private String shapeType = "Shape";
-    private Color color_bg = Color.WHITE;
+    private Label label = new Label();
 
     protected final List<Port> ports = new ArrayList<>();
-
-    private String label = "";
-    private Font labelFont = new Font("Arial", Font.PLAIN, 14);
-    private Color labelColor = Color.BLACK;
 
     protected Shape(){}
     public Shape(int x, int y, int width, int height, int depth) {
@@ -31,59 +26,51 @@ public abstract class Shape {
     }
 
 
-    public void initPorts(){
-        ports.clear();
-        ports.add(new Port(x + width / 2, y)); // top
-        ports.add(new Port(x + width / 2, y + height)); // bottom
-        ports.add(new Port(x, y + height / 2)); // left
-        ports.add(new Port(x + width, y + height / 2)); // right
-    }
+    public abstract void initPorts();
 //  Draw
     public abstract void draw(Graphics g);
 
     protected void drawPorts(Graphics g) {
-        if (selected) {
-            g.setColor(Color.RED);
-            for (Port port : ports) {
-                g.fillRect(port.getX() - 5, port.getY() - 5, 10, 10);
-            }
+        g.setColor(Color.RED);
+        for (Port port : ports) {
+            g.fillRect(port.getX() - 5, port.getY() - 5, 10, 10);
         }
     }
 
-    protected void drawTagBG(Graphics g) {
-        if(getShapeType() != "Shape"){
-            g.setColor(color_bg);
+//    protected void drawTagBG(Graphics g) {
+//        if(getShapeType() != "Shape"){
+//            g.setColor(color_bg);
+//
+//            int padding = 15;
+//            int innerX = x + padding;
+//            int innerY = y + padding;
+//            int innerW = width - 2 * padding;
+//            int innerH = height - 2 * padding;
+//
+//            if (getShapeType() == "Rect") {
+//                g.fillRect(innerX, innerY, innerW, innerH);
+//                g.setColor(Color.BLACK);
+//                g.drawRect(innerX, innerY, innerW, innerH);
+//            } else if(getShapeType() == "Oval"){
+//                g.fillOval(innerX, innerY, innerW, innerH);
+//                g.setColor(Color.BLACK);
+//                g.drawOval(innerX, innerY, innerW, innerH);
+//            }
+//        }
+//    }
 
-            int padding = 15;
-            int innerX = x + padding;
-            int innerY = y + padding;
-            int innerW = width - 2 * padding;
-            int innerH = height - 2 * padding;
-
-            if (getShapeType() == "Rect") {
-                g.fillRect(innerX, innerY, innerW, innerH);
-                g.setColor(Color.BLACK);
-                g.drawRect(innerX, innerY, innerW, innerH);
-            } else if(getShapeType() == "Oval"){
-                g.fillOval(innerX, innerY, innerW, innerH);
-                g.setColor(Color.BLACK);
-                g.drawOval(innerX, innerY, innerW, innerH);
-            }
-        }
-    }
-
-    protected void drawLabel(Graphics g) {
-        if (!label.isEmpty()) {
-            g.setFont(labelFont);
-            g.setColor(labelColor);
-            FontMetrics fm = g.getFontMetrics();
-            int textWidth = fm.stringWidth(label);
-            int textHeight = fm.getAscent();
-            int centerX = x + width / 2 - textWidth / 2;
-            int centerY = y + height / 2 + textHeight / 2;
-            g.drawString(label, centerX, centerY);
-        }
-    }
+//    protected void drawLabel(Graphics g) {
+//        if (!label.isEmpty()) {
+//            g.setFont(labelFont);
+//            g.setColor(labelColor);
+//            FontMetrics fm = g.getFontMetrics();
+//            int textWidth = fm.stringWidth(label);
+//            int textHeight = fm.getAscent();
+//            int centerX = x + width / 2 - textWidth / 2;
+//            int centerY = y + height / 2 + textHeight / 2;
+//            g.drawString(label, centerX, centerY);
+//        }
+//    }
     public abstract boolean contains(int px, int py);
     public void setX(int x) {
         this.x = x;
@@ -115,19 +102,19 @@ public abstract class Shape {
     public int getDepth() {
         return depth;
     }
-    public void setColor_bg(Color color_bg) {
-        this.color_bg = color_bg;
-    }
-    public Color getColor_bg() {
-        return color_bg;
-    }
-    public void setLabelShape(String shapeType) {
-        this.shapeType = shapeType;
-    }
-    public String getShapeType() { return shapeType; }
-    public void setShapeType(String shape) { this.shapeType = shape; }
-    public Color getBgColor() { return color_bg; }
-    public void setBgColor(Color color) { this.color_bg = color; }
+//    public void setColor_bg(Color color_bg) {
+//        this.color_bg = color_bg;
+//    }
+//    public Color getColor_bg() {
+//        return color_bg;
+//    }
+//    public void setLabelShape(String shapeType) {
+//        this.shapeType = shapeType;
+//    }
+//    public String getShapeType() { return shapeType; }
+//    public void setShapeType(String shape) { this.shapeType = shape; }
+//    public Color getBgColor() { return color_bg; }
+//    public void setBgColor(Color color) { this.color_bg = color; }
     public void setSelected(boolean s) { this.selected = s; }
 
     public Rectangle getBounds() {
@@ -147,21 +134,25 @@ public abstract class Shape {
 
 //    Label
 
-    public void setLabel(String label) {
-        this.label = label;
-    }
-    public String getLabel() {
+    public Label getLabel() {
         return label;
     }
-    public void setLabelFont(Font font) {
-        this.labelFont = font;
-    }
-    public Font getLabelFont() {
-        return labelFont;
-    }
-    public void setLabelColor(Color color) {
-        this.labelColor = color;
-    }
+
+    //    public void setLabel(String label) {
+//        this.label = label;
+//    }
+//    public String getLabel() {
+//        return label;
+//    }
+//    public void setLabelFont(Font font) {
+//        this.labelFont = font;
+//    }
+//    public Font getLabelFont() {
+//        return labelFont;
+//    }
+//    public void setLabelColor(Color color) {
+//        this.labelColor = color;
+//    }
 
     public List<Port> getPorts() {
         return ports;

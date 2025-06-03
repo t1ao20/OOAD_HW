@@ -43,10 +43,7 @@ public abstract class Link {
         this.pto = pto;
     }
 
-    public void draw(Graphics g) {
-        g.setColor(Color.BLACK);
-        g.drawLine(pfrom.getX(), pfrom.getY(), pto.getX(), pto.getY());
-    }
+    public abstract void draw(Graphics g);
 
     public void updatePorts() {
         if (sfrom != null) {

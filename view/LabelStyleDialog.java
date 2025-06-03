@@ -1,6 +1,8 @@
 package view;
 
 import model.Shape;
+import model.ShapeType;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,19 +14,27 @@ public class LabelStyleDialog extends JDialog {
         setLayout(new BorderLayout());
 
         // ===== 表單元件 =====
-        JTextField labelField = new JTextField(shape.getLabel());
+        JTextField labelField = new JTextField(shape.getLabel().getText());
 //        形狀
-        String[] shapeOptions = {"Rect", "Oval"};
-        JComboBox<String> shapeCombo = new JComboBox<>(shapeOptions);
-        shapeCombo.setSelectedItem(shape.getShapeType());
+//        String[] shapeOptions = {"Rect", "Oval"};
+//        JComboBox<String> shapeCombo = new JComboBox<>(shapeOptions);
+//        shapeCombo.setSelectedItem(shape.getLabel().getShapeType());
+
+        JComboBox<ShapeType> shapeCombo = new JComboBox<>(ShapeType.values());
+        shapeCombo.setSelectedItem(shape.getLabel().getShapeType());
+
+//        shapeCombo.addActionListener(e -> {
+//            ShapeType selectedType = (ShapeType) shapeCombo.getSelectedItem();
+//            shape.setShapeType(selectedType);
+//        });
 
 //      字型
         JComboBox<String> fontCombo = new JComboBox<>(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames());
-        fontCombo.setSelectedItem(shape.getLabelFont().getFamily());
+        fontCombo.setSelectedItem(shape.getLabel().getFont().getFamily());
 
 //      字體大小
         JComboBox<Integer> sizeCombo = new JComboBox<>(new Integer[]{6, 8, 10, 12, 14, 16, 18, 20, 24});
-        sizeCombo.setSelectedItem(shape.getLabelFont().getSize());
+        sizeCombo.setSelectedItem(shape.getLabel().getFont().getSize());
 
 ////      顏色 - Font
 //        JButton colorBtn = new JButton("Choose Color");
@@ -40,7 +50,7 @@ public class LabelStyleDialog extends JDialog {
 //      顏色 - BG
 //        JLabel colorPreview_BG = new JLabel("■");
         JButton bgColorBtn = new JButton(); // 按鈕作為 preview
-        Color defaultColor = shape.getColor_bg();
+        Color defaultColor = shape.getLabel().getBackgroundColor();
         bgColorBtn.setBackground(defaultColor);
         bgColorBtn.setPreferredSize(new Dimension(40, 20)); // 適合當 preview 小色塊
 
@@ -71,12 +81,12 @@ public class LabelStyleDialog extends JDialog {
 
 
         okBtn.addActionListener(e -> {
-            shape.setLabel(labelField.getText());
-            shape.setLabelFont(new Font((String) fontCombo.getSelectedItem(), Font.PLAIN, (Integer) sizeCombo.getSelectedItem()));
-            shape.setShapeType((String) shapeCombo.getSelectedItem());
-//            shape.setBgColor(colorPreview_BG.getForeground());
-            shape.setBgColor(bgColorBtn.getBackground());
+            shape.getLabel().setText(labelField.getText());
+            shape.getLabel().setFont(new Font((String) fontCombo.getSelectedItem(), Font.PLAIN, (Integer) sizeCombo.getSelectedItem()));
+            shape.getLabel().setShapeType((ShapeType) shapeCombo.getSelectedItem());
+            shape.getLabel().setBackgroundColor(bgColorBtn.getBackground());
             dispose();
+
         });
         JPanel btnPanel = new JPanel();
         btnPanel.add(cancelBtn);
