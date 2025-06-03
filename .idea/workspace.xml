@@ -2,25 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c027225-fdf7-43af-b4dd-bdc0ef0539a2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Composite.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/Composite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Link.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/Link/Link.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/LinkType.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/Link/LinkType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Oval.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/Oval.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Rect.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/Rect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Link/Link.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/Link/Link.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Port.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/Port.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/Shape.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/110502507_final/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/110502507_final/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/110502507_final/model/Composite.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/110502507_final/model/Composite.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/110502507_final/model/Link.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/110502507_final/model/Link.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/110502507_final/model/Oval.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/110502507_final/model/Oval.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/110502507_final/model/Rect.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/110502507_final/model/Rect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/110502507_final/model/Link$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/110502507_final/model/Link.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/110502507_final/model/LinkType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/110502507_final/model/Port.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/110502507_final/model/Port.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/110502507_final/model/Shape.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/110502507_final/model/Shape.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/110502507_final/utils/Mode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/110502507_final/utils/Mode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/110502507_final/view/CanvasPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/110502507_final/view/CanvasPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/110502507_final/view/LabelStyleDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/110502507_final/view/LabelStyleDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/Mode.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/Mode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/CanvasPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/view/CanvasPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/LabelStyleDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/view/LabelStyleDialog.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

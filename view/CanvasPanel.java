@@ -2,6 +2,7 @@ package view;
 
 import model.*;
 import model.Link.Link;
+import model.Link.LinkFactory;
 import model.Shape;
 import model.Composite;
 import utils.Mode;
@@ -102,7 +103,8 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
             Port endPort = getNearestConnectionPort(e.getPoint());
             Shape endShape = getShapeAt(e.getPoint());
             if (endPort != null && endShape != startShape) {
-                links.add(new Link(startShape, endShape, startPort, endPort, mode.toLinkType()));
+                Link link = LinkFactory.createLink(mode.toLinkType(), startShape, endShape, startPort, endPort);
+                links.add(link);
                 repaint();
             }
         }
@@ -269,10 +271,10 @@ private Port getNearestConnectionPort(Point p) {
 
     private Port getClosestPoint(List<Port> points, Point target) {
         Port closest = points.get(0);
-        Point closestPoint = new Point(closest.x, closest.y);
+        Point closestPoint = new Point(closest.getX(), closest.getY());
         double minDist = target.distance(closestPoint);
         for (Port p : points) {
-            double dist = target.distance(new Point(p.x, p.y));
+            double dist = target.distance(new Point(p.getX(), p.getY()));
             if (dist < minDist) {
                 minDist = dist;
                 closest = p;
@@ -318,12 +320,12 @@ private Port getNearestConnectionPort(Point p) {
             for (Link link : links) {
                 if (link.getFromShape() == oldShape) {
                     Port oldPort = link.getFromPort();
-                    Port closest = newShape.getClosestPort(oldPort.x, oldPort.y);
+                    Port closest = newShape.getClosestPort(oldPort.getX(), oldPort.getY());
                     link.setFrom(newShape, closest);
                 }
                 if (link.getToShape() == oldShape) {
                     Port oldPort = link.getToPort();
-                    Port closest = newShape.getClosestPort(oldPort.x, oldPort.y);
+                    Port closest = newShape.getClosestPort(oldPort.getX(), oldPort.getY());
                     link.setTo(newShape, closest);
                 }
             }

@@ -45,7 +45,7 @@ public abstract class Shape {
         if (selected) {
             g.setColor(Color.RED);
             for (Port port : ports) {
-                g.fillRect(port.x - 5, port.y - 5, 10, 10);
+                g.fillRect(port.getX() - 5, port.getY() - 5, 10, 10);
             }
         }
     }
@@ -174,7 +174,7 @@ public abstract class Shape {
         double minDistance = Double.MAX_VALUE;
 
         for (Port port : ports) {
-            Point p = new Point(port.x, port.y);
+            Point p = new Point(port.getX(), port.getY());
             double distance = p.distance(mouseX, mouseY);
             if (distance < minDistance) {
                 minDistance = distance;
