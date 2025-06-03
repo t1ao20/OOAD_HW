@@ -13,16 +13,20 @@ public class Composite extends Shape {
 
         for (Shape s : shapes) {
             children.add(s);
-            minX = Math.min(minX, s.x);
-            minY = Math.min(minY, s.y);
-            maxX = Math.max(maxX, s.x + s.width);
-            maxY = Math.max(maxY, s.y + s.height);
+            minX = Math.min(minX, s.getX());
+            minY = Math.min(minY, s.getY());
+            maxX = Math.max(maxX, s.getX() + s.getWidth());
+            maxY = Math.max(maxY, s.getY() + s.getHeight());
         }
 
-        this.x = minX;
-        this.y = minY;
-        this.width = maxX - minX;
-        this.height = maxY - minY;
+        this.setX(minX);
+        this.setY(minY);
+        this.setWidth(maxX - minX);
+        this.setHeight(maxY - minY);
+//        this.x = minX;
+//        this.y = minY;
+//        this.width = maxX - minX;
+//        this.height = maxY - minY;
     }
 
     @Override
@@ -35,12 +39,14 @@ public class Composite extends Shape {
     @Override
     public void draw(Graphics g) {
         for (Shape s : children) {
-            s.selected = selected;
+            //子圖案select狀態設定為composite物件的狀態
+            s.setSelected(this.isSelected());
+//            s.selected = selected;
             s.draw(g);
         }
-        if (selected) {
+        if (this.isSelected()) {
             g.setColor(Color.BLUE);
-            g.drawRect(x, y, width, height);
+            g.drawRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
         }
     }
 
@@ -63,14 +69,17 @@ public class Composite extends Shape {
 
     @Override
     public void move(int newX, int newY) {
-        int dx = newX - this.x;
-        int dy = newY - this.y;
+        int dx = newX - this.getX();
+        int dy = newY - this.getY();
 
-        this.x = newX;
-        this.y = newY;
+        this.setX(newX);
+        this.setY(newY);
+
+//        this.x = newX;
+//        this.y = newY;
 
         for (Shape s : children) {
-            s.move(s.x + dx, s.y + dy);
+            s.move(s.getX() + dx, s.getY() + dy);
         }
 
         initPorts();

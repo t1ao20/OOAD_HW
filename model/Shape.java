@@ -5,21 +5,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Shape {
-    public int x;
-    public int y;
-    public int width;
-    public int height;
-    protected int depth;
-    protected boolean selected;
-    protected String shapeType = "Shape";
-    public Color color_bg = Color.WHITE;
+    private int x;
+    private int y;
+    private int width;
+    private int height;
+    private int depth;
+    private boolean selected;
+    private String shapeType = "Shape";
+    private Color color_bg = Color.WHITE;
 
     protected final List<Port> ports = new ArrayList<>();
 
-    protected String label = "";
-    public Font labelFont = new Font("Arial", Font.PLAIN, 14);
-    public Color labelColor = Color.BLACK;
+    private String label = "";
+    private Font labelFont = new Font("Arial", Font.PLAIN, 14);
+    private Color labelColor = Color.BLACK;
 
+    protected Shape(){}
     public Shape(int x, int y, int width, int height, int depth) {
         this.x = x; this.y = y;
         this.width = width;
@@ -28,7 +29,7 @@ public abstract class Shape {
         this.selected = false;
         initPorts();
     }
-    protected Shape(){}
+
 
     public void initPorts(){
         ports.clear();
@@ -84,7 +85,7 @@ public abstract class Shape {
         }
     }
     public abstract boolean contains(int px, int py);
-    private void setX(int x) {
+    public void setX(int x) {
         this.x = x;
     }
     public void setY(int y) {
@@ -105,6 +106,9 @@ public abstract class Shape {
     public void setHeight(int height) {
         this.height = height;
     }
+    public int getHeight() {
+        return height;
+    }
     public void setDepth(int depth) {
         this.depth = depth;
     }
@@ -114,6 +118,9 @@ public abstract class Shape {
     public void setColor_bg(Color color_bg) {
         this.color_bg = color_bg;
     }
+    public Color getColor_bg() {
+        return color_bg;
+    }
     public void setLabelShape(String shapeType) {
         this.shapeType = shapeType;
     }
@@ -122,6 +129,7 @@ public abstract class Shape {
     public Color getBgColor() { return color_bg; }
     public void setBgColor(Color color) { this.color_bg = color; }
     public void setSelected(boolean s) { this.selected = s; }
+
     public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }
@@ -147,6 +155,9 @@ public abstract class Shape {
     }
     public void setLabelFont(Font font) {
         this.labelFont = font;
+    }
+    public Font getLabelFont() {
+        return labelFont;
     }
     public void setLabelColor(Color color) {
         this.labelColor = color;

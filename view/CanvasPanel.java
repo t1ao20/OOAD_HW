@@ -1,6 +1,7 @@
 package view;
 
 import model.*;
+import model.Link.Link;
 import model.Shape;
 import model.Composite;
 import utils.Mode;
@@ -76,7 +77,7 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
             for (Shape s : getSelectedShapes()) {
                 if (s.contains(e.getX(), e.getY())) {
                     draggingShapes.add(s);
-                    dragOffsets.put(s, new Point(e.getX() - s.x, e.getY() - s.y));
+                    dragOffsets.put(s, new Point(e.getX() - s.getX(), e.getY() - s.getY()));
                 }
             }
             Shape clickedShape = getShapeAt(e.getX(), e.getY());

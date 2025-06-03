@@ -1,8 +1,11 @@
-package model;
+package model.Link;
+
+import model.Port;
+import model.Shape;
 
 import java.awt.*;
 
-public class Link {
+public abstract class Link {
     private Port pfrom, pto;
     private Shape sfrom, sto;
     private LinkType type;
@@ -33,21 +36,11 @@ public class Link {
                 break;
         }
 
-//        if (sfrom != null && sfrom.isSelected()) {
-//            g.setColor(Color.RED);
-//            g.fillRect(pfrom.x - 5, pfrom.y - 5, 10, 10);
-//        }
-//
-//        if (sto != null && sto.isSelected()) {
-//            g.setColor(Color.RED);
-//            g.fillRect(pto.x - 5, pto.y - 5, 10, 10);
-//        }
-
     }
 
     public void updatePorts() {
         if (sfrom != null) {
-            if (sfrom instanceof Composite) {
+            if (sfrom instanceof model.Composite) {
                 pfrom = sfrom.getClosestPort(pfrom.x, pfrom.y);
             } else {
                 pfrom = sfrom.getClosestPort(pfrom.x, pfrom.y);
@@ -55,7 +48,7 @@ public class Link {
         }
 
         if (sto != null) {
-            if (sto instanceof Composite) {
+            if (sto instanceof model.Composite) {
                 pto = sto.getClosestPort(pto.x, pto.y);
             } else {
                 pto = sto.getClosestPort(pto.x, pto.y);
@@ -64,11 +57,11 @@ public class Link {
     }
 
 
-    public Shape getFromShape() {
+    public model.Shape getFromShape() {
         return sfrom;
     }
 
-    public Shape getToShape() {
+    public model.Shape getToShape() {
         return sto;
     }
 
@@ -80,7 +73,7 @@ public class Link {
         return pto;
     }
 
-    public void setFrom(Shape sfrom, Port pfrom) {
+    public void setFrom(model.Shape sfrom, Port pfrom) {
         this.sfrom = sfrom;
         this.pfrom = pfrom;
     }

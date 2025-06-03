@@ -20,11 +20,11 @@ public class LabelStyleDialog extends JDialog {
 
 //      字型
         JComboBox<String> fontCombo = new JComboBox<>(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames());
-        fontCombo.setSelectedItem(shape.labelFont.getFamily());
+        fontCombo.setSelectedItem(shape.getLabelFont().getFamily());
 
 //      字體大小
         JComboBox<Integer> sizeCombo = new JComboBox<>(new Integer[]{6, 8, 10, 12, 14, 16, 18, 20, 24});
-        sizeCombo.setSelectedItem(shape.labelFont.getSize());
+        sizeCombo.setSelectedItem(shape.getLabelFont().getSize());
 
 ////      顏色 - Font
 //        JButton colorBtn = new JButton("Choose Color");
@@ -40,7 +40,7 @@ public class LabelStyleDialog extends JDialog {
 //      顏色 - BG
 //        JLabel colorPreview_BG = new JLabel("■");
         JButton bgColorBtn = new JButton(); // 按鈕作為 preview
-        Color defaultColor = shape.color_bg;
+        Color defaultColor = shape.getColor_bg();
         bgColorBtn.setBackground(defaultColor);
         bgColorBtn.setPreferredSize(new Dimension(40, 20)); // 適合當 preview 小色塊
 

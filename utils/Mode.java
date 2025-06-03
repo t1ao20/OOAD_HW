@@ -1,6 +1,6 @@
 package utils;
 
-import model.LinkType;
+import model.Link.LinkType;
 
 public enum Mode {
     SELECT,

@@ -1,4 +1,4 @@
-package model;
+package model.Link;
 
 public enum LinkType {
     ASSOCIATION,
