@@ -42,6 +42,12 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
         this.mode = m;
     }
 
+    public void clearSelections() {
+        for (Shape s : getSelectedShapes()) {
+            s.setSelected(false);
+        }
+    }
+
     @Override
     public void mousePressed(MouseEvent e) {
         requestFocusInWindow(); // 為了能使用鍵盤事件
@@ -224,18 +230,6 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
     public List<Shape> getSelectedShapes() {
         return shapes.stream().filter(Shape::isSelected).collect(Collectors.toList());
     }
-    public void removeShapes(List<Shape> selected) {
-        shapes.removeAll(selected);
-    }
-    public void addShapes(List<Shape> newShapes) {
-        shapes.addAll(newShapes);
-    }
-    public void removeShape(Composite selected) {
-        shapes.removeAll(selected.getChildren());
-    }
-    public void addShape(Composite newShapes) {
-        shapes.addAll(newShapes.getChildren());
-    }
 
 //    Port
 private Port getNearestConnectionPort(Point p) {
@@ -295,43 +289,26 @@ private Port getNearestConnectionPort(Point p) {
         Composite group = new Composite(selectedShapes);
         group.setSelected(true);
         shapes.add(group);
+
         repaint();
     }
     public void ungroupSelectedShape() {
         Shape selected = getSelectedShape();
         if (!(selected instanceof Composite)) return;
 
-        Composite composite = (Composite) selected;
+        Composite selectedComposite = (Composite) selected;
 
         // 移除 composite
-        shapes.remove(composite);
+        shapes.remove(selectedComposite);
 
         // 加回原本的 children
-        for (Shape s : composite.getChildren()) {
+        for (Shape s : selectedComposite.getChildren()) {
             s.setSelected(true);
             shapes.add(s);
         }
         repaint();
     }
-    public void replaceShape(Shape oldShape, Shape newShape) {
-        int index = shapes.indexOf(oldShape);
-        if (index != -1) {
-            shapes.set(index, newShape);
-            for (Link link : links) {
-                if (link.getFromShape() == oldShape) {
-                    Port oldPort = link.getFromPort();
-                    Port closest = newShape.getClosestPort(oldPort.getX(), oldPort.getY());
-                    link.setFrom(newShape, closest);
-                }
-                if (link.getToShape() == oldShape) {
-                    Port oldPort = link.getToPort();
-                    Port closest = newShape.getClosestPort(oldPort.getX(), oldPort.getY());
-                    link.setTo(newShape, closest);
-                }
-            }
-            repaint();
-        }
-    }
+
     private List<Shape> getAllChildrenRecursively(Shape shape) {
         List<Shape> result = new ArrayList<>();
         if (shape instanceof Composite) {

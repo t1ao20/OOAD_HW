@@ -16,17 +16,8 @@ public class LabelStyleDialog extends JDialog {
         // ===== 表單元件 =====
         JTextField labelField = new JTextField(shape.getLabel().getText());
 //        形狀
-//        String[] shapeOptions = {"Rect", "Oval"};
-//        JComboBox<String> shapeCombo = new JComboBox<>(shapeOptions);
-//        shapeCombo.setSelectedItem(shape.getLabel().getShapeType());
-
         JComboBox<ShapeType> shapeCombo = new JComboBox<>(ShapeType.values());
         shapeCombo.setSelectedItem(shape.getLabel().getShapeType());
-
-//        shapeCombo.addActionListener(e -> {
-//            ShapeType selectedType = (ShapeType) shapeCombo.getSelectedItem();
-//            shape.setShapeType(selectedType);
-//        });
 
 //      字型
         JComboBox<String> fontCombo = new JComboBox<>(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames());
@@ -36,19 +27,7 @@ public class LabelStyleDialog extends JDialog {
         JComboBox<Integer> sizeCombo = new JComboBox<>(new Integer[]{6, 8, 10, 12, 14, 16, 18, 20, 24});
         sizeCombo.setSelectedItem(shape.getLabel().getFont().getSize());
 
-////      顏色 - Font
-//        JButton colorBtn = new JButton("Choose Color");
-//        JLabel colorPreview = new JLabel("■");
-//        colorPreview.setForeground(shape.color_bg);
-//        colorBtn.addActionListener(e -> {
-//            Color newColor = JColorChooser.showDialog(this, "Choose Label Color", shape.color_bg);
-//            if (newColor != null) {
-//                colorPreview.setForeground(newColor);
-//            }
-//        });
-
 //      顏色 - BG
-//        JLabel colorPreview_BG = new JLabel("■");
         JButton bgColorBtn = new JButton(); // 按鈕作為 preview
         Color defaultColor = shape.getLabel().getBackgroundColor();
         bgColorBtn.setBackground(defaultColor);
@@ -57,9 +36,7 @@ public class LabelStyleDialog extends JDialog {
         bgColorBtn.addActionListener(e -> {
             Color newColor = JColorChooser.showDialog(this, "Choose BG Color", defaultColor);
             if (newColor != null) {
-//                shape.color_bg = newColor;
                 bgColorBtn.setBackground(newColor); // 更新 preview
-//                colorPreview_BG.setForeground(newColor);
             }
         });
 

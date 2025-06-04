@@ -45,7 +45,6 @@ public class Composite extends Shape {
         }
     }
 
-
     @Override
     public boolean contains(int mx, int my) {
         for (Shape s : children) {
