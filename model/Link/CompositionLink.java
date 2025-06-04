@@ -1,7 +1,7 @@
 package model.Link;
 
-import model.Port;
-import model.Shape;
+import model.Shape.Port;
+import model.Shape.Shape;
 
 import java.awt.*;
 

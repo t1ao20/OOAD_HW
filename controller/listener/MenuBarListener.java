@@ -1,8 +1,8 @@
 package controller.listener;
 
 import view.*;
-import model.Shape;
-import model.Composite;
+import model.Shape.Shape;
+import model.Shape.Composite;
 
 import javax.swing.*;
 import java.util.List;

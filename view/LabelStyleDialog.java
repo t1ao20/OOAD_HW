@@ -1,7 +1,7 @@
 package view;
 
-import model.Shape;
-import model.ShapeType;
+import model.Shape.Shape;
+import model.Shape.ShapeType;
 
 import javax.swing.*;
 import java.awt.*;

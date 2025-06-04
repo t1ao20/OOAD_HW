@@ -3,14 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="1c027225-fdf7-43af-b4dd-bdc0ef0539a2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Composite.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/Composite.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/110502507_final/.idea/misc.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/110502507_final/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/110502507_final/.idea/uiDesigner.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/110502507_final/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/110502507_final/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/110502507_final/110502507_final.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/110502507_final/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/110502507_final/controller/AppController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/110502507_final/controller/listener/ButtonListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/110502507_final/controller/listener/MenuBarListener.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/110502507_final/model/Composite.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/110502507_final/model/Label$1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/110502507_final/model/Label.class" beforeDir="false" />
@@ -28,10 +30,12 @@
       <change beforePath="$PROJECT_DIR$/out/production/110502507_final/model/ShapeType.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/110502507_final/utils/Mode$1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/110502507_final/utils/Mode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/110502507_final/view/AppMenuBar.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/110502507_final/view/CanvasPanel.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/110502507_final/view/LabelStyleDialog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/110502507_final/view/MainFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/110502507_final/view/ModeButtonPanel.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/view/CanvasPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/view/CanvasPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/LabelStyleDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/view/LabelStyleDialog.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +65,13 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="controller" />
+      <recent name="listener" />
+      <recent name="view" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">

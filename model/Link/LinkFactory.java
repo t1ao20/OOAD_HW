@@ -1,7 +1,7 @@
 package model.Link;
 
-import model.Port;
-import model.Shape;
+import model.Shape.Port;
+import model.Shape.Shape;
 
 public class LinkFactory {
     public static Link createLink(LinkType type, Shape sfrom, Shape sto, Port pfrom, Port pto) {
