@@ -42,12 +42,6 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
         this.mode = m;
     }
 
-    public void clearSelections() {
-        for (Shape s : getSelectedShapes()) {
-            s.setSelected(false);
-        }
-    }
-
     @Override
     public void mousePressed(MouseEvent e) {
         requestFocusInWindow(); // 為了能使用鍵盤事件
@@ -232,14 +226,14 @@ public class CanvasPanel extends JPanel implements MouseListener, MouseMotionLis
     }
 
 //    Port
-private Port getNearestConnectionPort(Point p) {
-    for (Shape shape : shapes) {
-        if (shape.contains(p.x, p.y)) {
-            return getClosestPort(shape, p);
+    private Port getNearestConnectionPort(Point p) {
+        for (Shape shape : shapes) {
+            if (shape.contains(p.x, p.y)) {
+                return getClosestPort(shape, p);
+            }
         }
+        return null;
     }
-    return null;
-}
 
     private Shape getShapeAt(Point p) {
         for (Shape shape : shapes) {
