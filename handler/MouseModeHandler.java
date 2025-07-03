@@ -8,5 +8,5 @@ public interface MouseModeHandler {
     void mouseReleased(MouseEvent e);
     void mouseDragged(MouseEvent e);
     void mouseMoved(MouseEvent e);
-    void drawSelectionBox(Graphics g); // 選取框預留給 SELECT 模式用
+    void drawSelectionBox(Graphics g);
 }

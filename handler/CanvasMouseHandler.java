@@ -25,8 +25,6 @@ public class CanvasMouseHandler implements MouseListener, MouseMotionListener {
         handlers.put(Mode.ASSOCIATION, linkModeHandler);
         handlers.put(Mode.GENERALIZATION, linkModeHandler);
         handlers.put(Mode.COMPOSITION, linkModeHandler);
-
-        // 更多模式可繼續加
     }
 
     public void setMode(Mode m) {

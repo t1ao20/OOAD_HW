@@ -19,6 +19,7 @@ public class MenuBarListener {
     }
 
     public void bind() {
+        // label
         menuBar.getLabelItem().addActionListener(e -> {
             List<Shape> selected = canvas.getSelectedShapes();
             if (selected.size() == 1 && !(selected.get(0) instanceof Composite)) {

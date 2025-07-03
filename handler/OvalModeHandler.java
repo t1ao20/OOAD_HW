@@ -7,8 +7,6 @@ import java.awt.event.MouseEvent;
 
 public class OvalModeHandler implements MouseModeHandler {
     private final CanvasPanel canvas;
-    private Shape newShape = null;
-    private Point startPoint = null;
 
     public OvalModeHandler(CanvasPanel canvas) {
         this.canvas = canvas;
